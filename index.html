@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customized T-Shirt Order Form</title>
+    <style>
+      body {
+        font-family: Georgia, Times, 'Times New Roman', serif sans-serif;
+        font-size: 18px;
+        background-color: #90960f;
+        margin: 10px;
+        padding: 10px;
+      }
+      .order-form {
+        background-color: #dce536;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 70%;
+        margin: 20px auto;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+      }
+
+      .right-box {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        width: 55%;
+        display: block; /* Will be used for the box */
+      }
+      .right-box h2 {
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .right-box-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Centers the box horizontally */
+        width: 100%;
+      }
+      .right-box p {
+        color: #555;
+        line-height: 1.5;
+      }
+
+      fieldset {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 15px;
+      }
+      legend {
+        font-weight: bold;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type='text'],
+      input[type='email'],
+      input[type='number'],
+      input[type='date'],
+      select,
+      textarea {
+        width: calc(100% - 20px);
+        padding: 8px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      button {
+        width: calc(50% - 10px);
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+      button[type='reset'] {
+        background-color: #dc3545;
+      }
+      h2 {
+        color: white;
+      }
+      p {
+        color: rgb(206, 189, 189);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form id="orderForm" class="order-form">
+        <fieldset>
+          <legend>T-Shirt Customization</legend>
+          <label for="tagline">Tagline on the Shirt:</label>
+          <input
+            type="text"
+            id="tagline"
+            name="tagline"
+            placeholder="Enter your tagline"
+            required
+            maxlength="30"
+            <!--
+            Restrict
+            tagline
+            length
+            --
+          />
+          />
+
+          <label for="color">T-Shirt Color:</label>
+          <select id="color" name="color" required>
+            <option value="" disabled selected>Select color</option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="blue">Blue</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+          </select>
+
+          <label for="size">T-Shirt Size:</label>
+          <select id="size" name="size" required>
+            <option value="" disabled selected>Select size</option>
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+            <option value="xl">XL</option>
+            <option value="xxl">XXL</option>
+          </select>
+
+          <label for="quantity">Quantity:</label>
+          <input
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Enter quantity"
+            min="1"
+            required
+          />
+
+          <label for="delivery-date">Delivery Date:</label>
+          <input type="date" id="delivery-date" name="delivery-date" required />
+        </fieldset>
+
+        <fieldset>
+          <legend>Delivery Details</legend>
+          <label for="name">Recipient's Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter recipient's name"
+            required
+          />
+
+          <label for="address">Address:</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Enter address"
+            required
+          />
+
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter email address"
+            required
+          />
+
+          <label for="phone">Phone Number:</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="Enter phone number"
+            pattern="[0-9]{9}"
+            required
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend>Additional Comments</legend>
+          <textarea
+            id="comments"
+            name="comments"
+            rows="4"
+            placeholder="Any additional instructions or comments..."
+            maxlength="200"
+          ></textarea>
+        </fieldset>
+
+        <div style="display: flex; justify-content: space-between">
+          <button type="submit">Place Order</button>
+          <button type="reset">Reset Form</button>
+        </div>
+      </form>
+
+      <div class="right-box-wrapper">
+        <div id="receipt" class="right-box">
+          <h2>Order Confirmation</h2>
+          <p>Waiting for form submission...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class Person {
+        constructor(name, address, email, phone) {
+          this.name = name;
+          this.address = address;
+          this.email = email;
+          this.phone = phone;
+        }
+
+        // Arrow function as a member function
+        getDetails = () => {
+          return `Name: ${this.name}, Address: ${this.address}, Email: ${this.email}, Phone: ${this.phone}`;
+        };
+      }
+
+      class Student extends Person {
+        constructor(name, address, email, phone, rollNumber) {
+          super(name, address, email, phone);
+          this.rollNumber = rollNumber;
+        }
+
+        // Overriding method
+        getDetails() {
+          return `${super.getDetails()}, Roll Number: ${this.rollNumber}`;
+        }
+      }
+
+      document
+        .getElementById('orderForm')
+        .addEventListener('submit', function (event) {
+          event.preventDefault();
+
+          // Validation: Check phone number length
+          const phoneInput = document.getElementById('phone');
+          if (phoneInput.value.length !== 9) {
+            alert('Phone number must be 9 digits long.');
+            return;
+          }
+
+          // Processing order and generating receipt
+          const name = document.getElementById('name').value;
+          const address = document.getElementById('address').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+          const orderDate = new Date().toLocaleString();
+          const receiptDiv = document.getElementById('receipt');
+
+          // Create a new person object and display its details
+          const person = new Person(name, address, email, phone);
+          console.log(person.getDetails());
+
+          // Display the receipt
+          receiptDiv.innerHTML = `<h2>Order Confirmation</h2>
+                                <p>Thank you for your order, ${name}!</p>
+                                <p>Order Date: ${orderDate}</p>
+                                <p>Your order details: ${person.getDetails()}</p>`;
+          receiptDiv.innerHTML += `<p>${student.getDetails()}</p>`;
+
+          receiptDiv.style.display = 'block';
+          this.reset();
+        });
+
+      // Demonstrate inheritance and exception handling
+      try {
+        const student = new Student(
+          'John Doe',
+          '123 Main St',
+          'john.doe@example.com',
+          '123456789',
+          0
+        );
+        if (student.rollNumber <= 0)
+          throw 'Invalid roll number: must be greater than zero.';
+        console.log(student.getDetails());
+      } catch (error) {
+        console.error('Error: ' + error);
+      }
+    </script>
+  </body>
+</html>
